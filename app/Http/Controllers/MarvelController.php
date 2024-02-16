@@ -8,8 +8,8 @@ use App\Services\MarvelAdapter;
 class MarvelController extends Controller {
     
     public static function getSeries( Request $request ) {
-        $apikey = '5fdd8d0d12ae268069a79a205bb738fe';
-        $privateKey = 'd045b4029f83a62dfb0502b253b2ca6934f3cab1';
+        $apikey = env('MARVEL_PUBLIC_KEY');
+        $privateKey = env('MARVEL_PRIVATE_KEY');
         $ts = time();
         $hash = md5($ts . $privateKey . $apikey);
 

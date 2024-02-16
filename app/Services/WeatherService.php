@@ -5,7 +5,7 @@ namespace App\Services;
 class WeatherService
 {
     public static function getForecastDatas( array $cities, int $days ) {
-        $apiKey = 'b9cc4f4f3510e8c6130611073844c1e6';
+        $apiKey = env('OPENWEATHERMAP_PUBLIC_KEY');
         $forecastData = [];
 
         foreach ($cities as $city) {
@@ -19,7 +19,7 @@ class WeatherService
     }
 
     public static function getWeatherDatas( array $cities ) {
-        $apiKey = 'b9cc4f4f3510e8c6130611073844c1e6';
+        $apiKey = env('OPENWEATHERMAP_PUBLIC_KEY');
         $weatherDatas = [];
 
         foreach ($cities as $city) {
