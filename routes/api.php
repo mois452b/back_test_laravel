@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\WeatherController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -77,6 +79,4 @@ Route::post('images', function( Request $request ) {
     ]);
 });
 
-Route::get('peoples', function() {
-    return 'peoples';
-});
+Route::post('weather/forecast', [WeatherController::class, 'getForecast']);
