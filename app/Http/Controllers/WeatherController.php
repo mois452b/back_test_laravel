@@ -7,7 +7,7 @@ use App\Services\WeatherService;
 
 class WeatherController extends Controller
 {
-    public function getForecast(Request $request)
+    public function getForecasts(Request $request)
     {
         $request->validate([
             'cities' => 'required|array',
@@ -17,7 +17,7 @@ class WeatherController extends Controller
         $cities = $request->input('cities');
         $days = $request->input('days');
 
-        $forecastData = WeatherService::getForecastData( $cities, $days );
+        $forecastData = WeatherService::getForecastDatas( $cities, $days );
 
         return response()->json($forecastData);
     }

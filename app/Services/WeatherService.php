@@ -4,8 +4,7 @@ namespace App\Services;
 
 class WeatherService
 {
-    public static function getForecastData(array $cities, int $days)
-    {
+    public static function getForecastDatas( array $cities, int $days ) {
         $apiKey = 'b9cc4f4f3510e8c6130611073844c1e6';
         $forecastData = [];
 

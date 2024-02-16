@@ -79,4 +79,4 @@ Route::post('images', function( Request $request ) {
     ]);
 });
 
-Route::post('weather/forecast', [WeatherController::class, 'getForecast']);
+Route::post('weather/forecast', [WeatherController::class, 'getForecasts']);
