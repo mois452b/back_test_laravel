@@ -19,6 +19,10 @@ class WeatherController extends Controller
 
         $forecastData = WeatherService::getForecastDatas( $cities, $days );
 
+        $forecastData = array_map( function( $data ) {
+            return WeatherAdapter::forecastData( $data );
+        });
+
         return response()->json($forecastData);
     }
 

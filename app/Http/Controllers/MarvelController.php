@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\MarvelAdapter;
 
 class MarvelController extends Controller {
     
@@ -29,6 +30,12 @@ class MarvelController extends Controller {
 
         if (isset($seriesData['data']) && isset($seriesData['data']['results'])) {
             $series = $seriesData['data']['results'];
+            
+            $series = array_map( function( $data ) {
+                $data['mediaType'] = 'series';
+                return MarvelAdapter::seriesData( $data );
+            }, $series );
+
             return response()->json($series);
         }
 
