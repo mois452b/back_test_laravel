@@ -17,4 +17,18 @@ class WeatherService
 
         return $forecastData;
     }
+
+    public static function getWeatherDatas( array $cities ) {
+        $apiKey = 'b9cc4f4f3510e8c6130611073844c1e6';
+        $weatherDatas = [];
+
+        foreach ($cities as $city) {
+            $url = "https://api.openweathermap.org/data/2.5/weather?q={$city}&appid={$apiKey}";
+            $response = file_get_contents($url);
+            $data = json_decode($response, true);
+            $weatherDatas[] = $data;
+        }
+
+        return $weatherDatas;
+    }
 }
