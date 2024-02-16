@@ -21,7 +21,7 @@ class WeatherController extends Controller
 
         $forecastData = array_map( function( $data ) {
             return WeatherAdapter::forecastData( $data );
-        });
+        }, $forecastData );
 
         return response()->json($forecastData);
     }
