@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\WeatherController;
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +34,8 @@ Route::get('marvels/', function() {
     $curlSeries = curl_init($seriesUrl);
 
     curl_setopt($curlSeries, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curlSeries, CURLOPT_SSL_VERIFYPEER, false); // Desactiva la verificación SSL (solo para pruebas)
-
+    curl_setopt($curlSeries, CURLOPT_SSL_VERIFYPEER, false);
+    
     $seriesResponse = curl_exec($curlSeries);
 
     curl_close($curlSeries);
@@ -49,35 +50,7 @@ Route::get('marvels/', function() {
     return [];
 });
 
-Route::post('images', function( Request $request ) {
-    // Validar la solicitud y asegurarse de que se haya enviado una imagen
-    $request->validate([
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Ajusta los formatos y el tamaño máximo según tus necesidades
-    ]);
-
-    // Obtener la imagen del request
-    $image = $request->file('image');
-
-    // Obtener información básica de la imagen
-    $imageName = $image->getClientOriginalName();
-    $imageSize = $image->getSize();
-    $imageFormat = $image->getClientOriginalExtension();
-
-    // Obtener dimensiones de la imagen
-    list($width, $height) = getimagesize($image);
-
-    // Procesar cualquier otra información que necesites aquí
-
-    // Devolver la información de la imagen como JSON
-    return response()->json([
-        'name' => $imageName,
-        'size' => $imageSize,
-        'format' => $imageFormat,
-        'width' => $width,
-        'height' => $height,
-        // Agrega cualquier otra información que desees retornar
-    ]);
-});
+Route::post('images', [ImageController::class, 'getImageData']);
 
 Route::post('weather', [WeatherController::class, 'getWeathers']);
 Route::post('weather/forecast', [WeatherController::class, 'getForecasts']);
